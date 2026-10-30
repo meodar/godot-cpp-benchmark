@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjqomxwaiyje7"]
+
+[ext_resource type="PackedScene" uid="uid://4r0ucv8eaqmp" path="res://assets/models/terrain/terrain.gltf" id="1_mgpfe"]
+[ext_resource type="PackedScene" uid="uid://onxhrj23hlvu" path="res://player.tscn" id="2_pl1wv"]
+[ext_resource type="PackedScene" uid="uid://dxw6x28yne3da" path="res://top_enemy.tscn" id="3_iooh7"]
+[ext_resource type="PackedScene" uid="uid://c1me8bgchkh0w" path="res://side_enemy.tscn" id="4_asfs6"]
+
+[node name="Land" type="Land"]
+land = NodePath("terrain")
+second_land = NodePath("terrain2")
+camera = NodePath("Camera3D")
+player = NodePath("Player")
+
+[node name="terrain" parent="." instance=ExtResource("1_mgpfe")]
+transform = Transform3D(-0.000174846, 0, -4000, 0, 4000, 0, 4000, 0, -0.000174846, 0, -800, 0)
+
+[node name="terrain2" parent="." instance=ExtResource("1_mgpfe")]
+transform = Transform3D(-0.000174846, 0, -4000, 0, 4000, 0, 4000, 0, -0.000174846, 0, -800, -32000)
+
+[node name="Player" parent="." instance=ExtResource("2_pl1wv")]
+transform = Transform3D(-20, 0, -1.74846e-06, 0, 20, 0, 1.74846e-06, 0, -20, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, -8.74228e-07, 20, 0, -20, -8.74228e-07, 0, 1000, 0)
+projection = 1
+size = 1400.0
+far = 40000.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.25038, 0.968148, 0, -0.968148, -0.25038, 0, 0, 0)
+
+[node name="EnemiesManager" type="EnemiesManager" parent="."]
+top_enemy_scene = ExtResource("3_iooh7")
+side_enemy_scene = ExtResource("4_asfs6")
+spawn_timer_path = NodePath("Timer")
+benchmark_timer_path = NodePath("Timer2")
+
+[node name="Timer" type="Timer" parent="EnemiesManager"]
+wait_time = 2.0
+autostart = true
+
+[node name="Timer2" type="Timer" parent="EnemiesManager"]
+wait_time = 10.0
+autostart = true
+
+[node name="PerfMonitor" type="PerfMonitor" parent="."]
+wait_time = 0.25
+autostart = true

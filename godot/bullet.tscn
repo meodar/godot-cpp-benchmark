@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy1xtqlyx02tm"]
+
+[ext_resource type="PackedScene" uid="uid://c0hamf5dstk51" path="res://assets/models/bullet/bullet.gltf" id="1_v7oki"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_v7oki"]
+radius = 1.003
+
+[node name="Bullet" type="Bullet"]
+
+[node name="Bullet" parent="." instance=ExtResource("1_v7oki")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_v7oki")

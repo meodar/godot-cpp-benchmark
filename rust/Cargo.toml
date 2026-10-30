@@ -1,0 +1,22 @@
+[package]
+name = "benchmark-cpp-rs"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+godot = "0.5.5"
+sysinfo = "0.39.6"
+nvml-wrapper = "0.13.0"
+chrono = "0.4.45"
+
+[profile.release]
+opt-level = 3          # максимальный уровень оптимизаций
+debug = false          # без отладочной информации
+lto = true             # Link-Time Optimization — дополнительно оптимизирует на этапе линковки
+codegen-units = 1      # один «юнит» компоновки, чтобы LLVM мог лучше оптимизировать код целиком
+panic = "abort"        # вместо unwinding использовать abort — уменьшает размер кода
+strip = "debuginfo"    # удалить отладочную информацию из собранного артефакта
+incremental = false    # отключить инкрементальную компиляцию для чистоты релиза
